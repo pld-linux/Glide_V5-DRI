@@ -65,3 +65,14 @@
  {
    long rVal = 0;
  
+--- glide3x-20010309/h5/glide3/src/xdraw2.inc.s.orig	Fri Nov 17 22:31:06 2000
++++ glide3x-20010309/h5/glide3/src/xdraw2.inc.s	Fri Aug  3 22:55:09 2001
+@@ -295,7 +295,7 @@
+ 	push %edi	/*  save caller's register variable */
+ 	push %esi	/*  save caller's register variable  */
+ 
+-	mov %edx , gc	/*  gc in edx from caller */
++	mov _gc-8(%esp) , gc	/*  gc on stack (NOT!!! in edx) from caller */
+ 	push %ebx	/*  save caller's register variable */
+ 
+ 	push %ebp	/*  save frame pointer */

@@ -55,3 +55,14 @@
  
  endif
  
+--- glide3x-20010309/h3/glide3/src/xdraw2.inc.S.orig	Fri Oct 20 21:07:00 2000
++++ glide3x-20010309/h3/glide3/src/xdraw2.inc.S	Fri Aug  3 22:56:46 2001
+@@ -246,7 +246,7 @@
+ 	push %edi	/*  save caller's register variable */
+ 	push %esi	/*  save caller's register variable  */
+ 
+-	mov %edx , gc	/*  gc in edx from caller */
++	mov _gc-8(%esp) , gc	/*  gc on stack (NOT!!! in edx) from caller */
+ 	push %ebx	/*  save caller's register variable */
+ 
+ 	push %ebp	/*  save frame pointer */
