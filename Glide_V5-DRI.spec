@@ -8,13 +8,6 @@ Epoch:		1
 License:	3dfx Glide General Public License, 3Dfx Interactive Inc.
 Vendor:		3dfx Interactive Inc.
 Group:		X11/Libraries
-Group(de):	X11/Libraries
-Group(es):	X11/Bibliotecas
-Group(fr):	X11/Librairies
-Group(pl):	X11/Biblioteki
-Group(pt_BR):	X11/Bibliotecas
-Group(ru):	X11/Библиотеки
-Group(uk):	X11/Б╕бл╕отеки
 Source0:	cvs://anonymous@cvs.glide.sourceforge.net:/cvsroot/glide/glide3x-%{snapdate}.tar.gz
 Patch0:		glide-ia64.patch
 Patch1:		glide-ac-workaround.patch
@@ -44,13 +37,6 @@ wersji Glide z DRI i bez DRI.
 Summary:	Development headers for Glide 3.x
 Summary(pl):	Pliki nagЁСwkowe Glide 3.x
 Group:		X11/Development/Libraries
-Group(de):	X11/Entwicklung/Libraries
-Group(es):	X11/Desarrollo/Bibliotecas
-Group(fr):	X11/Development/Librairies
-Group(pl):	X11/Programowanie/Biblioteki
-Group(pt_BR):	X11/Desenvolvimento/Bibliotecas
-Group(ru):	X11/Разработка/Библиотеки
-Group(uk):	X11/Розробка/Б╕бл╕отеки
 Requires:	%{name} = %{version}
 Provides:	Glide3-DRI-devel
 Obsoletes:	Glide_V3-DRI-devel
@@ -69,13 +55,6 @@ Interactive Voodoo4 lub Voodoo5.
 Summary:	Static Glide 3.x library
 Summary(pl):	Statyczne biblioteki Glide 3.x
 Group:		X11/Development/Libraries
-Group(de):	X11/Entwicklung/Libraries
-Group(es):	X11/Desarrollo/Bibliotecas
-Group(fr):	X11/Development/Librairies
-Group(pl):	X11/Programowanie/Biblioteki
-Group(pt_BR):	X11/Desenvolvimento/Bibliotecas
-Group(ru):	X11/Разработка/Библиотеки
-Group(uk):	X11/Розробка/Б╕бл╕отеки
 Requires:	%{name}-devel = %{version}
 Provides:	Glide3-DRI-static
 Obsoletes:	Glide_V3-DRI-static
