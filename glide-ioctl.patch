@@ -50,7 +50,7 @@
    desc.size=sizeof(data);
    desc.value=&data;
 -  return ioctl(linuxDevFd, _IOW(0, 1, sizeof(struct pioData)), &desc)!=-1;
-+  return ioctl(linuxDevFd, _IOW(0, 1, struct pioData, &desc)!=-1;
++  return ioctl(linuxDevFd, _IOW(0, 1, struct pioData), &desc)!=-1;
  }
  
  static FxBool 
@@ -59,7 +59,7 @@
    desc.size=sizeof(data);
    desc.value=&data;
 -  return ioctl(linuxDevFd, _IOW(0, 1, sizeof(struct pioData)), &desc)!=-1;
-+  return ioctl(linuxDevFd, _IOW(0, 1, struct pioData, &desc)!=-1;
++  return ioctl(linuxDevFd, _IOW(0, 1, struct pioData), &desc)!=-1;
  }
  
  static FxBool 
@@ -68,7 +68,7 @@
    desc.size=sizeof(data);
    desc.value=&data;
 -  return ioctl(linuxDevFd, _IOW(0, 1, sizeof(struct pioData)), &desc)!=-1;
-+  return ioctl(linuxDevFd, _IOW(0, 1, struct pioData, &desc)!=-1;
++  return ioctl(linuxDevFd, _IOW(0, 1, struct pioData), &desc)!=-1;
  }
  
  static FxBool
