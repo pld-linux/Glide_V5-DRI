@@ -27,7 +27,7 @@ BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 Provides:	Glide3-DRI
 Obsoletes:	Glide_V3-DRI
 
-%description 
+%description
 This library allows the user to use a 3dfx Interactive Voodoo4 or
 Voodoo5 card under Linux with DRI support. The source support DRI or
 non-DRI versions of Glide.
