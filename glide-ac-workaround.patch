@@ -1,0 +1,20 @@
+--- glide3x-20010309/configure.in.orig	Tue Jul 31 12:09:28 2001
++++ glide3x-20010309/configure.in	Tue Jul 31 12:08:38 2001
+@@ -143,7 +143,7 @@
+               [dnl
+   --enable-build-architecture Enable AMD 3DNow instructions [default=current]],
+               [case ${enableval} in
+-               i[3456]86|alpha)
++               i[[3456]]86|alpha)
+                    FX_GLIDE_BUILD_ARCHITECTURE=${enableval}
+                    ;;
+                *)
+@@ -171,7 +171,7 @@
+ GLIDE_SANITY_SIZE=false
+ FX_DLL_BUILD=false
+ FX_GLIDE_HW_CULL=false
+-ARCH=`uname -m | sed "s|[456]86|386|g"`
++ARCH=`uname -m | sed "s|[[456]]86|386|g"`
+ if test "$ARCH" = "i386" ; then
+   FX_GLIDE_CTRISETUP=false
+ else

@@ -1,0 +1,67 @@
+--- glide3x-20010309/h5/glide3/src/makefile.autoconf.am.orig	Tue Oct 31 04:25:45 2000
++++ glide3x-20010309/h5/glide3/src/makefile.autoconf.am	Tue Jul 31 12:34:22 2001
+@@ -155,38 +155,32 @@
+ PREPROCESSOR=/lib/cpp -$$ -I.
+ xdraw2_def.o xdraw2_def.lo: xdraw2.s xdraw2.inc.s fxgasm.h
+ 	$(PREPROCESSOR) $< > $*.tmp.s
+-	$(CC) $(AFLAGS) -c -o $*.o $*.tmp.s
+-	$(CP) $*.o $*.lo
++	libtool --mode=compile $(CC) $(AFLAGS) -c -o $*.o $*.tmp.s
+ 	$(RM) -f $*.tmp.s
+ 
+ xdraw2_3dnow.o xdraw2_3dnow.lo: xdraw2.s xdraw2.inc.s fxgasm.h
+ 	$(PREPROCESSOR) -DGL_AMD3D -DUSE_PACKET_FIFO=1 $< > $*.tmp.s
+-	$(CC) $(AFLAGS) -c -o $*.o $*.tmp.s
+-	$(CP) $*.o $*.lo
++	libtool --mode=compile $(CC) $(AFLAGS) -c -o $*.o $*.tmp.s
+ 	$(RM) -f $*.tmp.s
+ 
+ xdraw3_def.o xdraw3_def.lo: xdraw3.s fxgasm.h
+ 	$(PREPROCESSOR) $< > $*.tmp.s
+-	$(CC) $(AFLAGS) -c -o $*.o $*.tmp.s
+-	$(CP) $*.o $*.lo
++	libtool --mode=compile $(CC) $(AFLAGS) -c -o $*.o $*.tmp.s
+ 	$(RM) -f $*.tmp.s
+ 
+ xdraw3_3dnow.o xdraw3_3dnow.lo: xdraw3.s fxgasm.h
+ 	$(PREPROCESSOR) -DGL_AMD3D -DUSE_PACKET_FIFO=1 $< > $*.tmp.s
+-	$(CC) $(AFLAGS) -c -o $*.o $*.tmp.s
+-	$(CP) $*.o $*.lo
++	libtool --mode=compile $(CC) $(AFLAGS) -c -o $*.o $*.tmp.s
+ 	$(RM) -f $*.tmp.s
+ 
+ xtexdl_3dnow.o xtexdl_3dnow.lo: xtexdl.s fxgasm.h 
+ 	$(PREPROCESSOR) -DGL_AMD3D -DUSE_PACKET_FIFO=1 $< > $*.tmp.s
+-	$(CC) $(AFLAGS) -c -o $*.o $*.tmp.s
+-	$(CP) $*.o $*.lo
++	libtool --mode=compile $(CC) $(AFLAGS) -c -o $*.o $*.tmp.s
+ 	$(RM) -f $*.tmp.s
+ 
+ cpudtect.o cpudtect.lo: cpudtect.s
+ 	$(PREPROCESSOR) -DUSE_PACKET_FIFO=1 $< > $*.tmp.s
+-	$(CC) $(AFLAGS) -c -o $*.o $*.tmp.s
+-	$(CP) $*.o $*.lo
++	libtool --mode=compile $(CC) $(AFLAGS) -c -o $*.o $*.tmp.s
+ 	$(RM) -f $*.tmp.s
+ 
+ #
+@@ -190,7 +190,7 @@
+ FX_GLIDE_CTRISETUP_SRC = gxdraw.c
+ else
+ if GL_AMD3D
+-FX_GLIDE_CTRISETUP_SRC = xdraw2_3dnow.s xdraw3_3dnow.s
++FX_GLIDE_CTRISETUP_SRC = xdraw2_3dnow.s xdraw3_3dnow.s xtexdl_3dnow.s xdraw2_def.s xdraw3_def.s
+ else
+ FX_GLIDE_CTRISETUP_SRC = xdraw2_def.s xdraw3_def.s
+ endif
+--- glide3x-20010309/h5/glide3/src/fifo.c.orig	Tue Jul 31 12:38:36 2001
++++ glide3x-20010309/h5/glide3/src/fifo.c	Tue Jul 31 15:28:31 2001
+@@ -1181,7 +1181,7 @@
+ 
+ 
+ long
+-_griHwFifoPtr(FxBool ignored)
++_grHwFifoPtr(FxBool ignored)
+ {
+   long rVal = 0;
+ 
