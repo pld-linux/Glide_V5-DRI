@@ -3,7 +3,7 @@ Summary:	Glide runtime for 3Dfx Voodoo4 and Voodoo5 boards
 Summary(pl):	Biblioteki Glide dla kart 3Dfx Voodoo4 i Voodoo5
 Name:		Glide_V5-DRI
 Version:	3.10.0
-Release:	0.%{snapdate}.7
+Release:	0.%{snapdate}.8
 Epoch:		1
 License:	3dfx Glide General Public License, 3Dfx Interactive Inc.
 Vendor:		3dfx Interactive Inc.
