@@ -18,3 +18,11 @@
  if test "$ARCH" = "i386" ; then
    FX_GLIDE_CTRISETUP=false
  else
+@@ -223,6 +223,7 @@
+ 
+ dnl Checks for programs.
+ AC_PROG_CC
++AM_PROG_AS
+ AC_PROG_CPP
+ AC_CHECK_TOOL(AS, as, false)
+ AC_CHECK_TOOL(OBJDUMP, objdump, false)

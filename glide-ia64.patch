@@ -1621,7 +1621,7 @@
 -FxU32
 -_grHwFifoPtr(FxBool ignored)
 +long
-+_griHwFifoPtr(FxBool ignored)
++_grHwFifoPtr(FxBool ignored)
  {
 -  FxU32 rVal = 0;
 +  long rVal = 0;

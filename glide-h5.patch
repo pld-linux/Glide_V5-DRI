@@ -54,17 +54,6 @@
  else
  FX_GLIDE_CTRISETUP_SRC = xdraw2_def.s xdraw3_def.s
  endif
---- glide3x-20010309/h5/glide3/src/fifo.c.orig	Tue Jul 31 12:38:36 2001
-+++ glide3x-20010309/h5/glide3/src/fifo.c	Tue Jul 31 15:28:31 2001
-@@ -1181,7 +1181,7 @@
- 
- 
- long
--_griHwFifoPtr(FxBool ignored)
-+_grHwFifoPtr(FxBool ignored)
- {
-   long rVal = 0;
- 
 --- glide3x-20010309/h5/glide3/src/xdraw2.inc.s.orig	Fri Nov 17 22:31:06 2000
 +++ glide3x-20010309/h5/glide3/src/xdraw2.inc.s	Fri Aug  3 22:55:09 2001
 @@ -295,7 +295,7 @@

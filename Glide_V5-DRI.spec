@@ -102,7 +102,7 @@ rm -f missing
 libtoolize --copy --force
 aclocal
 autoconf
-automake -a -c
+automake -a -c -i
 %configure \
 	--enable-fx-dri-build \
 	--enable-fx-glide-hw=h5 \
