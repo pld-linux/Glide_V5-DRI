@@ -105,7 +105,7 @@ automake -a -c -i
 	--enable-fx-dri-build \
 	--enable-fx-glide-hw=h5 \
 	--enable-fx-debug=no \
-%ifarch athlon
+%ifarch i586 i686 athlon
 	--enable-amd3d
 %endif
 
