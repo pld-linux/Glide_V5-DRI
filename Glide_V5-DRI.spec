@@ -99,7 +99,9 @@ Voodoo5.
 
 %{__make} -f makefile.autoconf all \
 	GLIDE_DEBUG_GCFLAGS="%{rpmcflags} -fno-expensive-optimizations %{!?debug:-fomit-frame-pointer -ffast-math}" \
-	GLIDE_DEBUG_GDEFS="%{!?debug:-DBIG_OPT} %{?debug:-DGDBG_INFO_ON -DGLIDE_DEBUG}"
+	GLIDE_DEBUG_GDEFS="%{!?debug:-DBIG_OPT} %{?debug:-DGDBG_INFO_ON -DGLIDE_DEBUG}" \
+	LINK_LIBS="-L/usr/X11R6/%{_lib} -lX11 -lXext -lXxf86dga -lXxf86vm -lm" \
+	PREPROCESSOR='cpp -$$ -I.'
 
 %install
 rm -rf $RPM_BUILD_ROOT
