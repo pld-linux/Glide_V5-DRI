@@ -1,0 +1,122 @@
+--- glide3x-20010309/h3/glide3/src/fxglide.h.orig	Thu Jul 17 16:10:34 2003
++++ glide3x-20010309/h3/glide3/src/fxglide.h	Thu Jul 17 16:19:04 2003
+@@ -1517,7 +1517,7 @@
+ 
+ #ifdef GLIDE3
+ #define GR_STATE_ENTRY(name, type, args) \
+-   type _##name## args
++   type _##name args
+ #else
+ #define GR_STATE_ENTRY(name, type, args) \
+    GR_ENTRY(name, type, args)
+@@ -1836,7 +1836,7 @@
+ #define CUR_TRI_PROC(__checkValidP, __cullP) \
+   (*gc->archDispatchProcs.coorModeTriVector)[__checkValidP][__cullP]
+ #define INVALIDATE(regset) {\
+-  gc->state.invalid |= ##regset##BIT; \
++  gc->state.invalid |= regset##BIT; \
+   gc->triSetupProc = CUR_TRI_PROC(FXTRUE, (gc->state.cull_mode != GR_CULL_DISABLE)); \
+ }
+ 
+--- glide3x-20010309/h3/glide3/src/distate.c.orig	Fri Nov 24 19:36:48 2000
++++ glide3x-20010309/h3/glide3/src/distate.c	Thu Jul 17 16:24:04 2003
+@@ -203,23 +203,23 @@
+  */
+ 
+ #define STOREARG(function, arg) \
+-gc->state.stateArgs.##function##Args.arg = arg
++gc->state.stateArgs.function##Args.arg = arg
+ 
+ #define LOADARG(function, arg) \
+-gc->state.stateArgs.##function##Args.arg
++gc->state.stateArgs.function##Args.arg
+ 
+ 
+ #define NOTVALID(regset) \
+-(gc->state.invalid & ##regset##BIT)
++(gc->state.invalid & regset##BIT)
+ 
+ #define SETVALID(regset) \
+-(gc->state.invalid &= ~(##regset##BIT))
++(gc->state.invalid &= ~(regset##BIT))
+ 
+ #define ENABLEMODE(mode) \
+-gc->state.grEnableArgs.##mode## = GR_MODE_ENABLE;
++gc->state.grEnableArgs.mode = GR_MODE_ENABLE;
+ 
+ #define DISABLEMODE(mode) \
+-gc->state.grEnableArgs.##mode## = GR_MODE_DISABLE;
++gc->state.grEnableArgs.mode = GR_MODE_DISABLE;
+ 
+ /*-------------------------------------------------------------------
+   Function: grAlphaBlendFunction
+--- glide3x-20010309/h5/glide3/src/fxglide.h.orig	Thu Jul 17 17:00:23 2003
++++ glide3x-20010309/h5/glide3/src/fxglide.h	Thu Jul 17 17:08:30 2003
+@@ -2123,7 +2123,7 @@
+ 
+ #ifdef GLIDE3
+ #define GR_STATE_ENTRY(name, type, args) \
+-   type _##name## args
++   type _##name args
+ #else
+ #define GR_STATE_ENTRY(name, type, args) \
+    GR_ENTRY(name, type, args)
+@@ -2630,13 +2630,13 @@
+ #define CUR_TRI_PROC(__checkValidP, __cullP) \
+   (*gc->archDispatchProcs.coorModeTriVector)[__checkValidP][__cullP]
+ #define INVALIDATE(regset) {\
+-  gc->state.invalid |= ##regset##BIT; \
++  gc->state.invalid |= regset##BIT; \
+   gc->triSetupProc = CUR_TRI_PROC(FXTRUE, (gc->state.cull_mode != GR_CULL_DISABLE)); \
+ }
+ 
+ #define INVALIDATE_TMU(tmu, regset) {\
+   INVALIDATE(tmuConfig); \
+-  gc->state.tmuInvalid[tmu] |= ##regset##BIT; \
++  gc->state.tmuInvalid[tmu] |= regset##BIT; \
+ }
+   
+ void 
+--- glide3x-20010309/h5/glide3/src/distate.c.orig	Fri Nov 24 19:36:47 2000
++++ glide3x-20010309/h5/glide3/src/distate.c	Thu Jul 17 17:09:02 2003
+@@ -349,31 +349,31 @@
+  */
+ 
+ #define STOREARG_TMU(function, tmu, arg) \
+-gc->state.stateArgs.##function##Args.arg[tmu] = arg
++gc->state.stateArgs.function##Args.arg[tmu] = arg
+ 
+ #define LOADARG_TMU(function, tmu, arg) \
+-gc->state.stateArgs.##function##Args.arg[tmu]
++gc->state.stateArgs.function##Args.arg[tmu]
+ 
+ #define STOREARG(function, arg) \
+-gc->state.stateArgs.##function##Args.arg = arg
++gc->state.stateArgs.function##Args.arg = arg
+ 
+ #define LOADARG(function, arg) \
+-gc->state.stateArgs.##function##Args.arg
++gc->state.stateArgs.function##Args.arg
+ 
+ #define NOTVALID(regset) \
+-(gc->state.invalid & ##regset##BIT)
++(gc->state.invalid & regset##BIT)
+ 
+ #define NOTVALID_TMU(tmu, regset) \
+-(gc->state.tmuInvalid[tmu] & ##regset##BIT)
++(gc->state.tmuInvalid[tmu] & regset##BIT)
+ 
+ #define SETVALID(regset) \
+-(gc->state.invalid &= ~(##regset##BIT))
++(gc->state.invalid &= ~(regset##BIT))
+ 
+ #define ENABLEMODE(mode) \
+-gc->state.grEnableArgs.##mode## = GR_MODE_ENABLE;
++gc->state.grEnableArgs.mode = GR_MODE_ENABLE;
+ 
+ #define DISABLEMODE(mode) \
+-gc->state.grEnableArgs.##mode## = GR_MODE_DISABLE;
++gc->state.grEnableArgs.mode = GR_MODE_DISABLE;
+ 
+ /*-------------------------------------------------------------------
+   Function: grAlphaBlendFunction
