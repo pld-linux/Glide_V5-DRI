@@ -80,8 +80,8 @@ Voodoo5.
 rm -f missing
 libtoolize --copy --force
 aclocal
-autoconf
-automake -a -c -f -i
+%{__autoconf}
+%{__automake} -i
 %configure \
 	--enable-fx-dri-build \
 	--enable-fx-glide-hw=h5 \
