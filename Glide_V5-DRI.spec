@@ -5,7 +5,7 @@ Summary:	Glide runtime for 3Dfx Voodoo4 and Voodoo5 boards
 Summary(pl):	Biblioteki Glide dla kart 3Dfx Voodoo4 i Voodoo5
 Name:		Glide_V5-DRI
 Version:	3.10.0
-Release:	0.%{snapdate}.3
+Release:	0.%{snapdate}.4
 Epoch:		1
 Group:		X11/Libraries
 Group(de):	X11/Libraries
@@ -78,7 +78,7 @@ Group(pl):	X11/Programowanie/Biblioteki
 Group(pt_BR):	X11/Desenvolvimento/Bibliotecas
 Group(ru):	X11/Разработка/Библиотеки
 Group(uk):	X11/Розробка/Б╕бл╕отеки
-Requires:	%{name} = %{version}
+Requires:	%{name}-devel = %{version}
 Provides:	Glide3-DRI-static
 Obsoletes:	Glide_V3-DRI-static
 
