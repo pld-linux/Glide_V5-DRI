@@ -39,7 +39,7 @@ wersji Glide z DRI i bez DRI.
 Summary:	Development headers for Glide 3.x
 Summary(pl):	Pliki nag³ówkowe Glide 3.x
 Group:		X11/Development/Libraries
-Requires:	%{name} = %{version}
+Requires:	%{name} = %{epoch}:%{version}-%{release}
 Provides:	Glide3-DRI-devel
 Obsoletes:	Glide_V3-DRI-devel
 
@@ -57,7 +57,7 @@ Interactive Voodoo4 lub Voodoo5.
 Summary:	Static Glide 3.x library
 Summary(pl):	Statyczne biblioteki Glide 3.x
 Group:		X11/Development/Libraries
-Requires:	%{name}-devel = %{version}
+Requires:	%{name}-devel = %{epoch}:%{version}-%{release}
 Provides:	Glide3-DRI-static
 Obsoletes:	Glide_V3-DRI-static
 
