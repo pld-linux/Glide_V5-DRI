@@ -117,8 +117,6 @@ install h5/glide3/tests/test??.c $RPM_BUILD_ROOT%{_examplesdir}/glide3/tests
 install h5/glide3/tests/tldata.inc $RPM_BUILD_ROOT%{_examplesdir}/glide3/tests
 install h5/glide3/tests/tlib.[ch] $RPM_BUILD_ROOT%{_examplesdir}/glide3/tests
 
-gzip -9nf glide_license.txt $RPM_BUILD_ROOT%{_examplesdir}/glide3/tests/t*.3df
-
 %clean
 rm -rf $RPM_BUILD_ROOT
 
@@ -127,7 +125,7 @@ rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(644,root,root,755)
-%doc glide_license.txt.gz
+%doc glide_license.txt
 %attr(755,root,root) %{_libdir}/libglide3.so.*.*.*
 %attr(755,root,root) %{_libdir}/libglide3-v5.so
 %attr(755,root,root) %{_libdir}/libglide3x.so
