@@ -17,6 +17,7 @@ Patch2:		glide-h3.patch
 Patch3:		glide-h5.patch
 Patch4:		glide-am16.patch
 Patch5:		glide-gcc33.patch
+Patch6:		glide-ioctl.patch
 Icon:		3dfx.gif
 URL:		http://glide.sourceforge.net/
 BuildRequires:	XFree86-devel
@@ -79,9 +80,9 @@ Voodoo5.
 %patch3 -p1
 %patch4 -p1
 %patch5 -p1
+%patch6 -p1
 
 %build
-rm -f missing
 %{__libtoolize}
 %{__aclocal}
 %{__autoconf}
@@ -137,10 +138,10 @@ rm -rf $RPM_BUILD_ROOT
 
 %files devel
 %defattr(644,root,root,755)
-%{_examplesdir}/glide3
-%{_libdir}/lib*.la
 %attr(755,root,root) %{_libdir}/libglide3.so
+%{_libdir}/lib*.la
 %{_includedir}/glide3
+%{_examplesdir}/glide3
 
 %files static
 %defattr(644,root,root,755)
