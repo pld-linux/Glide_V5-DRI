@@ -9,6 +9,7 @@ License:	3dfx Glide General Public License, 3Dfx Interactive Inc.
 Vendor:		3dfx Interactive Inc.
 Group:		X11/Libraries
 Source0:	cvs://anonymous@cvs.glide.sourceforge.net:/cvsroot/glide/glide3x-%{snapdate}.tar.gz
+# Source0-md5:	42a8e093221b2360ec96191ae0e13ce0
 Patch0:		glide-ia64.patch
 Patch1:		glide-ac-workaround.patch
 Patch2:		glide-h3.patch
