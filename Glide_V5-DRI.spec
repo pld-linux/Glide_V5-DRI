@@ -1,12 +1,12 @@
-#
-# _with_3dnow	- with 3Dnow! instructions
 %define snapdate 20010309
 Summary:	Glide runtime for 3Dfx Voodoo4 and Voodoo5 boards
 Summary(pl):	Biblioteki Glide dla kart 3Dfx Voodoo4 i Voodoo5
 Name:		Glide_V5-DRI
 Version:	3.10.0
-Release:	0.%{snapdate}.4
+Release:	0.%{snapdate}.5
 Epoch:		1
+License:	3dfx Glide General Public License, 3Dfx Interactive Inc.
+Vendor:		3dfx Interactive Inc.
 Group:		X11/Libraries
 Group(de):	X11/Libraries
 Group(es):	X11/Bibliotecas
@@ -15,15 +15,13 @@ Group(pl):	X11/Biblioteki
 Group(pt_BR):	X11/Bibliotecas
 Group(ru):	X11/‚…¬Ã…œ‘≈À…
 Group(uk):	X11/‚¶¬Ã¶œ‘≈À…
-License:	3dfx Glide General Public License, 3Dfx Interactive Inc.
-URL:		http://glide.sourceforge.net/
 Source0:	cvs://anonymous@cvs.glide.sourceforge.net:/cvsroot/glide/glide3x-%{snapdate}.tar.gz
 Patch0:		glide-ia64.patch
 Patch1:		glide-ac-workaround.patch
 Patch2:		glide-h3.patch
 Patch3:		glide-h5.patch
-Vendor:		3dfx Interactive Inc.
 Icon:		3dfx.gif
+URL:		http://glide.sourceforge.net/
 BuildRequires:	XFree86-devel
 BuildRequires:	automake
 BuildRequires:	autoconf
@@ -62,7 +60,7 @@ This package includes the headers files, documentation, and test files
 necessary for developing applications that use the 3Dfx Interactive
 Voodoo4 or Voodoo5 cards.
 
-%description -l pl devel
+%description devel -l pl
 Ten pakiet zawiera pliki nag≥Ûwkowe, dokumentacje, oraz pliki tekstowe
 wymagane przez aplikacje deweloperskie, ktÛre uøywaj± kart 3Dfx
 Interactive Voodoo4 lub Voodoo5.
@@ -86,7 +84,7 @@ Obsoletes:	Glide_V3-DRI-static
 This package includes the static Glide3 library for Voodoo4 or
 Voodoo5.
 
-%description -l pl static
+%description static -l pl
 Ten pakiet zawiera statyczne biblioteki Glide3 dla Voodoo4 lub
 Voodoo5.
 
@@ -107,7 +105,9 @@ automake -a -c -i
 	--enable-fx-dri-build \
 	--enable-fx-glide-hw=h5 \
 	--enable-fx-debug=no \
-	%{?_with_3dnow:--enable-amd3d}
+%ifarch i586 i686
+	--enable-amd3d
+%endif
 
 %{__make} -f makefile.autoconf all \
 	GLIDE_DEBUG_GCFLAGS="%{rpmcflags} -fno-expensive-optimizations %{!?debug:-fomit-frame-pointer -ffast-math}" \
@@ -133,7 +133,7 @@ install h5/glide3/tests/test??.c $RPM_BUILD_ROOT%{_examplesdir}/glide3/tests
 install h5/glide3/tests/tldata.inc $RPM_BUILD_ROOT%{_examplesdir}/glide3/tests
 install h5/glide3/tests/tlib.[ch] $RPM_BUILD_ROOT%{_examplesdir}/glide3/tests
 
-gzip -9nf glide_license.txt
+gzip -9nf glide_license.txt $RPM_BUILD_ROOT%{_examplesdir}/glide3/tests/t*.3df
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -150,7 +150,6 @@ rm -rf $RPM_BUILD_ROOT
 
 %files devel
 %defattr(644,root,root,755)
-#%doc docs/*.pdf
 %{_examplesdir}/glide3
 %attr(755,root,root) %{_libdir}/lib*.la
 %attr(755,root,root) %{_libdir}/libglide3.so
