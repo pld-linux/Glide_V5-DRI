@@ -4,7 +4,7 @@ Summary(ko):	3Dfx 부두 벤쉬/3 비디오카드용 Glide 런타임 라이브러리
 Summary(pl):	Biblioteki Glide dla kart 3Dfx Voodoo4 i Voodoo5
 Name:		Glide_V5-DRI
 Version:	3.10.0
-Release:	0.%{snapdate}.10
+Release:	0.%{snapdate}.11
 Epoch:		1
 License:	3dfx Glide General Public License, 3Dfx Interactive Inc.
 Vendor:		3dfx Interactive Inc.
@@ -105,7 +105,7 @@ Voodoo5.
 
 %install
 rm -rf $RPM_BUILD_ROOT
-install -d $RPM_BUILD_ROOT%{_examplesdir}/glide3/tests
+install -d $RPM_BUILD_ROOT%{_examplesdir}/%{name}-%{version}/tests
 
 # something is recompiled - use GCFLAGS too
 %{__make} -f makefile.autoconf install \
@@ -120,11 +120,12 @@ ln -sf libglide3.so.%{version} $RPM_BUILD_ROOT%{_libdir}/libglide3x_V5.so
 ln -sf libglide3.so.%{version} $RPM_BUILD_ROOT%{_libdir}/libglide3x.so
 
 # Install the examples and their source, no binaries
-install h5/glide3/tests/makefile.linux $RPM_BUILD_ROOT%{_examplesdir}/glide3/tests/makefile
-install h5/glide3/tests/*.3df $RPM_BUILD_ROOT%{_examplesdir}/glide3/tests
-install h5/glide3/tests/test??.c $RPM_BUILD_ROOT%{_examplesdir}/glide3/tests
-install h5/glide3/tests/tldata.inc $RPM_BUILD_ROOT%{_examplesdir}/glide3/tests
-install h5/glide3/tests/tlib.[ch] $RPM_BUILD_ROOT%{_examplesdir}/glide3/tests
+install h5/glide3/tests/makefile.linux $RPM_BUILD_ROOT%{_examplesdir}/%{name}-%{version}/tests/makefile
+install h5/glide3/tests/*.3df $RPM_BUILD_ROOT%{_examplesdir}/%{name}-%{version}/tests
+install h5/glide3/tests/test??.c $RPM_BUILD_ROOT%{_examplesdir}/%{name}-%{version}/tests
+install h5/glide3/tests/tldata.inc $RPM_BUILD_ROOT%{_examplesdir}/%{name}-%{version}/tests
+install h5/glide3/tests/tlib.[ch] $RPM_BUILD_ROOT%{_examplesdir}/%{name}-%{version}/tests
+gzip -9nf $RPM_BUILD_ROOT%{_examplesdir}/%{name}-%{version}/tests/*.3df
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -145,7 +146,7 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libdir}/libglide3.so
 %{_libdir}/lib*.la
 %{_includedir}/glide3
-%{_examplesdir}/glide3
+%{_examplesdir}/%{name}-%{version}
 
 %files static
 %defattr(644,root,root,755)
