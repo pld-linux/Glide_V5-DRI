@@ -1,0 +1,68 @@
+--- glide3x.orig/h3/glide3/src/xdraw2.inc.S
++++ glide3x/h3/glide3/src/xdraw2.inc.S
+@@ -59,6 +59,8 @@
+ .file "xdraw2.inc.S"
+ 
+ 
++#ifndef XDRAW2_FIFO_MACROS
++#define XDRAW2_FIFO_MACROS
+ .macro GR_FIFO_WRITE __addr __offset __data
+ 	mov \__data , \__offset(\__addr)
+ .endm	/*  GR_FIFO_WRITE */
+@@ -72,6 +74,7 @@
+ .macro WRITE_MM1LOW_FIFO 
+ 	movd %mm1 , (%ebp)	/*  store current param | previous param */
+ .endm	/*  WRITE_MM1LOW_FIFO */
++#endif
+ 
+ 
+ #if 0
+@@ -815,9 +818,12 @@ LOCAL(nocull):
+ #define packCol %edi
+ #define tempVal %edi
+ 
++#ifndef XDRAW2_FIFO_MACROS
++#define XDRAW2_FIFO_MACROS
+ .macro GR_FIFO_WRITE __addr __offset __data
+ 	mov \__data , \__offset(\__addr)
+ .endm	/*  GR_FIFO_WRITE */
++#endif
+ 
+ .align 4
+ LOCAL(__triBegin):
+--- glide3x.orig/h5/glide3/src/xdraw2.inc.s
++++ glide3x/h5/glide3/src/xdraw2.inc.s
+@@ -81,6 +81,8 @@
+ .file "xdraw2.inc.S"
+ 
+ 
++#ifndef XDRAW2_FIFO_MACROS
++#define XDRAW2_FIFO_MACROS
+ .macro GR_FIFO_WRITE __addr __offset __data
+ #ifdef HAL_CSIM
+ 	pushad 
+@@ -121,6 +123,7 @@
+ 	movd %mm1 , (%ebp)	/*  store current param | previous param */
+ #endif
+ .endm	/*  WRITE_MM1LOW_FIFO */
++#endif
+ 
+ 
+ #if 0
+@@ -867,6 +870,8 @@ LOCAL(nocull):
+ #define packCol %edi
+ #define tempVal %edi
+ 
++#ifndef XDRAW2_FIFO_MACROS
++#define XDRAW2_FIFO_MACROS
+ .macro GR_FIFO_WRITE __addr __offset __data
+ #ifdef HAL_CSIM
+ 	pushad 
+@@ -884,6 +889,7 @@ LOCAL(nocull):
+ 	mov \__data , \__offset(\__addr)
+ #endif
+ .endm	/*  GR_FIFO_WRITE */
++#endif
+ 
+ .align 4
+ LOCAL(__triBegin):

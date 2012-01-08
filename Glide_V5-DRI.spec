@@ -1,13 +1,13 @@
 %define snapdate 20010309
+%define	rel	12
 Summary:	Glide runtime for 3Dfx Voodoo4 and Voodoo5 boards
 Summary(ko.UTF-8):	3Dfx 부두 벤쉬/3 비디오카드용 Glide 런타임 라이브러리
 Summary(pl.UTF-8):	Biblioteki Glide dla kart 3Dfx Voodoo4 i Voodoo5
 Name:		Glide_V5-DRI
 Version:	3.10.0
-Release:	0.%{snapdate}.11
+Release:	0.%{snapdate}.%{rel}
 Epoch:		1
 License:	3dfx Glide General Public License, 3Dfx Interactive Inc.
-Vendor:		3dfx Interactive Inc.
 Group:		X11/Libraries
 Source0:	cvs://anonymous@cvs.glide.sourceforge.net:/cvsroot/glide/glide3x-%{snapdate}.tar.gz
 # Source0-md5:	42a8e093221b2360ec96191ae0e13ce0
@@ -19,14 +19,19 @@ Patch4:		glide-am16.patch
 Patch5:		glide-gcc33.patch
 Patch6:		glide-ioctl.patch
 Patch7:		glide-morearchs.patch
+Patch8:		glide-gcc4.patch
+Patch9:		glide-no_redefine_macro.patch
 URL:		http://glide.sourceforge.net/
-BuildRequires:	XFree86-devel
-BuildRequires:	automake
 BuildRequires:	autoconf
+BuildRequires:	automake
 BuildRequires:	libtool
-BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
+BuildRequires:	xorg-lib-libX11-devel
+BuildRequires:	xorg-lib-libXext-devel
+BuildRequires:	xorg-lib-libXxf86dga-devel
+BuildRequires:	xorg-lib-libXxf86vm-devel
 Provides:	Glide3-DRI
 Obsoletes:	Glide_V3-DRI
+BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
 This library allows the user to use a 3dfx Interactive Voodoo4 or
@@ -82,6 +87,8 @@ Voodoo5.
 %patch5 -p1
 %patch6 -p1
 %patch7 -p1
+%patch8 -p2
+%patch9 -p1
 
 %build
 %{__libtoolize}
@@ -96,11 +103,11 @@ Voodoo5.
 	--enable-amd3d
 %endif
 
-%{__make} -f makefile.autoconf all \
+%{__make} -j1 -f makefile.autoconf all \
 	GLIDE_DEBUG_GCFLAGS="%{rpmcflags} -fno-expensive-optimizations %{!?debug:-fomit-frame-pointer -ffast-math}" \
 	GLIDE_DEBUG_GDEFS="%{!?debug:-DBIG_OPT} %{?debug:-DGDBG_INFO_ON -DGLIDE_DEBUG}" \
-	LINK_LIBS="-L/usr/X11R6/%{_lib} -lX11 -lXext -lXxf86dga -lXxf86vm -lm" \
-	PREPROCESSOR='cpp -$$ -I.'
+	LINK_LIBS="-lX11 -lXext -lXxf86dga -lXxf86vm -lm" \
+	PREPROCESSOR='cpp -I. -x assembler-with-cpp'
 
 %install
 rm -rf $RPM_BUILD_ROOT
@@ -110,6 +117,7 @@ install -d $RPM_BUILD_ROOT%{_examplesdir}/%{name}-%{version}/tests
 %{__make} -f makefile.autoconf install \
 	GLIDE_DEBUG_GCFLAGS="%{rpmcflags} -fno-expensive-optimizations %{!?debug:-fomit-frame-pointer -ffast-math}" \
 	GLIDE_DEBUG_GDEFS="%{!?debug:-DBIG_OPT} %{?debug:-DGDBG_INFO_ON -DGLIDE_DEBUG}" \
+	LINK_LIBS="-lX11 -lXext -lXxf86dga -lXxf86vm -lm" \
 	DESTDIR=$RPM_BUILD_ROOT
 
 # used by tdfx_dri.so from XFree86
@@ -136,6 +144,7 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %doc glide_license.txt
 %attr(755,root,root) %{_libdir}/libglide3.so.*.*.*
+%attr(755,root,root) %ghost %{_libdir}/libglide3.so.3
 %attr(755,root,root) %{_libdir}/libglide3-v5.so
 %attr(755,root,root) %{_libdir}/libglide3x.so
 %attr(755,root,root) %{_libdir}/libglide3x_V5.so
@@ -143,10 +152,10 @@ rm -rf $RPM_BUILD_ROOT
 %files devel
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/libglide3.so
-%{_libdir}/lib*.la
+%{_libdir}/libglide3.la
 %{_includedir}/glide3
 %{_examplesdir}/%{name}-%{version}
 
 %files static
 %defattr(644,root,root,755)
-%{_libdir}/lib*.a
+%{_libdir}/libglide3.a
