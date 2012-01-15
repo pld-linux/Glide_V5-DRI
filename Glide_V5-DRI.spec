@@ -1,3 +1,7 @@
+#
+# Conditional build:
+%bcond_without	glide3_sdk	# don't build glide3x SDK here
+#
 %define snapdate 20010309
 %define	rel	12
 Summary:	Glide runtime for 3Dfx Voodoo4 and Voodoo5 boards
@@ -77,6 +81,22 @@ Voodoo5.
 Ten pakiet zawiera statyczne biblioteki Glide3 dla Voodoo4 lub
 Voodoo5.
 
+%package -n Glide3x_SDK
+Summary:	Development libraries for Glide 3.x
+Summary(pl.UTF-8):	Część Glide 3.x przeznaczona dla programistów
+Group:		Development/Libraries
+Conflicts:	Glide_SDK
+
+%description -n Glide3x_SDK
+This package includes the header files and test files necessary for
+developing applications that use any of the 3D accelerators in the
+3Dfx Interactive Voodoo line utilizing Glide 3.x interface.
+
+%description -n Glide3x_SDK -l pl.UTF-8
+Ten pakiet zawiera pliki nagłówkowe i pliki testowe potrzebne do
+tworzenia aplikacji korzystających z akceleratorów 3D serii 3Dfx
+Interactive Voodoo przy użyciu interfejsu Glide 3.x.
+
 %prep
 %setup -q -n glide3x-%{snapdate}
 %patch0 -p1
@@ -111,7 +131,6 @@ Voodoo5.
 
 %install
 rm -rf $RPM_BUILD_ROOT
-install -d $RPM_BUILD_ROOT%{_examplesdir}/%{name}-%{version}/tests
 
 # something is recompiled - use GCFLAGS too
 %{__make} -f makefile.autoconf install \
@@ -124,15 +143,21 @@ install -d $RPM_BUILD_ROOT%{_examplesdir}/%{name}-%{version}/tests
 ln -sf libglide3.so.%{version} $RPM_BUILD_ROOT%{_libdir}/libglide3-v5.so
 # used by ???
 ln -sf libglide3.so.%{version} $RPM_BUILD_ROOT%{_libdir}/libglide3x_V5.so
+# used by dlopen in X driver
 ln -sf libglide3.so.%{version} $RPM_BUILD_ROOT%{_libdir}/libglide3x.so
 
+%if %{with glide3_sdk}
 # Install the examples and their source, no binaries
+install -d $RPM_BUILD_ROOT%{_examplesdir}/%{name}-%{version}/tests
 install h5/glide3/tests/makefile.linux $RPM_BUILD_ROOT%{_examplesdir}/%{name}-%{version}/tests/makefile
 install h5/glide3/tests/*.3df $RPM_BUILD_ROOT%{_examplesdir}/%{name}-%{version}/tests
 install h5/glide3/tests/test??.c $RPM_BUILD_ROOT%{_examplesdir}/%{name}-%{version}/tests
 install h5/glide3/tests/tldata.inc $RPM_BUILD_ROOT%{_examplesdir}/%{name}-%{version}/tests
 install h5/glide3/tests/tlib.[ch] $RPM_BUILD_ROOT%{_examplesdir}/%{name}-%{version}/tests
 gzip -9nf $RPM_BUILD_ROOT%{_examplesdir}/%{name}-%{version}/tests/*.3df
+%else
+%{__rm} -r $RPM_BUILD_ROOT%{_includedir}/glide3
+%endif
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -153,9 +178,14 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/libglide3.so
 %{_libdir}/libglide3.la
-%{_includedir}/glide3
-%{_examplesdir}/%{name}-%{version}
 
 %files static
 %defattr(644,root,root,755)
 %{_libdir}/libglide3.a
+
+%if %{with glide3_sdk}
+%files -n Glide3_SDK
+%defattr(644,root,root,755)
+%{_includedir}/glide3
+%{_examplesdir}/%{name}-%{version}
+%endif
