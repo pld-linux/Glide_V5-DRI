@@ -52,6 +52,7 @@ Summary:	Development headers for Glide 3.x
 Summary(pl.UTF-8):	Pliki nagłówkowe Glide 3.x
 Group:		X11/Development/Libraries
 Requires:	%{name} = %{epoch}:%{version}-%{release}
+Requires:	Glide3x_SDK >= %{epoch}:%{version}
 Provides:	Glide3-DRI-devel
 Obsoletes:	Glide_V3-DRI-devel
 
@@ -148,13 +149,13 @@ ln -sf libglide3.so.%{version} $RPM_BUILD_ROOT%{_libdir}/libglide3x.so
 
 %if %{with glide3_sdk}
 # Install the examples and their source, no binaries
-install -d $RPM_BUILD_ROOT%{_examplesdir}/%{name}-%{version}/tests
-install h5/glide3/tests/makefile.linux $RPM_BUILD_ROOT%{_examplesdir}/%{name}-%{version}/tests/makefile
-install h5/glide3/tests/*.3df $RPM_BUILD_ROOT%{_examplesdir}/%{name}-%{version}/tests
-install h5/glide3/tests/test??.c $RPM_BUILD_ROOT%{_examplesdir}/%{name}-%{version}/tests
-install h5/glide3/tests/tldata.inc $RPM_BUILD_ROOT%{_examplesdir}/%{name}-%{version}/tests
-install h5/glide3/tests/tlib.[ch] $RPM_BUILD_ROOT%{_examplesdir}/%{name}-%{version}/tests
-gzip -9nf $RPM_BUILD_ROOT%{_examplesdir}/%{name}-%{version}/tests/*.3df
+install -d $RPM_BUILD_ROOT%{_examplesdir}/glide3x-%{version}/tests
+install h5/glide3/tests/makefile.linux $RPM_BUILD_ROOT%{_examplesdir}/glide3x-%{version}/tests/makefile
+install h5/glide3/tests/*.3df $RPM_BUILD_ROOT%{_examplesdir}/glide3x-%{version}/tests
+install h5/glide3/tests/test??.c $RPM_BUILD_ROOT%{_examplesdir}/glide3x-%{version}/tests
+install h5/glide3/tests/tldata.inc $RPM_BUILD_ROOT%{_examplesdir}/glide3x-%{version}/tests
+install h5/glide3/tests/tlib.[ch] $RPM_BUILD_ROOT%{_examplesdir}/glide3x-%{version}/tests
+gzip -9nf $RPM_BUILD_ROOT%{_examplesdir}/glide3x-%{version}/tests/*.3df
 %else
 %{__rm} -r $RPM_BUILD_ROOT%{_includedir}/glide3
 %endif
@@ -184,8 +185,8 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/libglide3.a
 
 %if %{with glide3_sdk}
-%files -n Glide3_SDK
+%files -n Glide3x_SDK
 %defattr(644,root,root,755)
 %{_includedir}/glide3
-%{_examplesdir}/%{name}-%{version}
+%{_examplesdir}/glide3x-%{version}
 %endif
