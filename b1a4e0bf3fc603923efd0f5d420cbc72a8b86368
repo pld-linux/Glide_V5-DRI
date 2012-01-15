@@ -1,0 +1,4 @@
+- use %%rpmcflags, added _with_3dnow (using AMD 3Dnow! instructions)
+- forkaround for new autoconf ([] from [456]86 disappeared)
+- fixed build with 3Dnow and for hw=h5
+NOTE: SEGV on Voodoo4 when optimizations enabled
