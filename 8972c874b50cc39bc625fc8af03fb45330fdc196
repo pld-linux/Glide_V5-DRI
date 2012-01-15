@@ -1,0 +1,3 @@
+- gulp... added asm code fix to h3 and h5 patches - on Linux gc is passed on
+  stack, not in edx (funny that edx may contain correct value - depending on
+  optimizations)
