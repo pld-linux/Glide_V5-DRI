@@ -1,0 +1,35 @@
+--- glide3x-20010309/swlibs/fxmisc/fximg.c.orig	2013-09-23 20:58:11.901484168 +0200
++++ glide3x-20010309/swlibs/fxmisc/fximg.c	2013-09-23 21:05:44.205839503 +0200
+@@ -1949,8 +1949,8 @@
+ 	    char buf[1024], *p;
+ 	    strcpy(buf,prefix);			// copy and replace semicolon
+ 	    if ((p = strchr(buf,';')) != NULL) *p = '\0';
+-	    fprintf(stderr,buf);
+-	    fprintf(stderr,"/");
++	    fputs(buf,stderr);
++	    fputs("/",stderr);
+ 	}
+ 	fprintf (stderr,"%s (%ldx%ld) ...", filename, info->any.width,info->any.height);
+ 	fflush(stderr);
+--- glide3x-20010309/swlibs/newpci/pcilib/fxlinux.c.orig	2013-09-23 21:11:16.631291071 +0200
++++ glide3x-20010309/swlibs/newpci/pcilib/fxlinux.c	2013-09-23 21:15:00.308354535 +0200
+@@ -184,7 +184,7 @@
+ static FxBool 
+ pciOutputStringLinux(const char *msg) 
+ {
+-  printf(msg);
++  fputs(msg,stdout);
+   return FXTRUE;
+ }
+ 
+--- glide3x-20010309/swlibs/texus2/lib/eigen.c.orig	2000-08-03 02:27:18.000000000 +0200
++++ glide3x-20010309/swlibs/texus2/lib/eigen.c	2013-09-23 21:16:20.665422963 +0200
+@@ -409,7 +409,7 @@
+     int i;
+ 
+     if (title) {
+-        fprintf(stdout, title);
++        fputs(title, stdout);
+     }
+ 
+     if (input) {

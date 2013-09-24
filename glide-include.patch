@@ -1,0 +1,40 @@
+--- glide3x-20010309/swlibs/fxmisc/fxos.c.orig	2013-09-23 21:06:22.480951884 +0200
++++ glide3x-20010309/swlibs/fxmisc/fxos.c	2013-09-23 21:10:39.596235960 +0200
+@@ -43,13 +43,21 @@
+ #include <fxos.h>
+ #endif
+ #if !macintosh
++#if defined ( __sparc__ ) || defined ( __DJGPP__ )
++#   include <sys/types.h>
++#   include <sys/timeb.h>
++#elif defined ( WIN32 ) || ( __DOS__ )
++#   include <time.h>
++#else
++#   include <sys/types.h>
++#   include <sys/times.h>
++#   include <sys/param.h>
++#endif
+ /* return current time in seconds (floating point)      */
+ float fxTime(void)
+ {
+ #if defined ( __sparc__ ) || defined ( __DJGPP__ )
+ /* times returns 0 in BSD Unix, so we use ftime instead */
+-#   include <sys/types.h>
+-#   include <sys/timeb.h>
+     struct timeb tb;
+     static time_t once;                 // saves first time value
+ 
+@@ -60,13 +68,9 @@
+     
+ #else
+ #if defined ( WIN32 ) || ( __DOS__ )
+-#   include <time.h>
+ #   define times(a) clock()
+ #   define HZ   CLOCKS_PER_SEC
+ #else
+-#   include <sys/types.h>
+-#   include <sys/times.h>
+-#   include <sys/param.h>
+     struct tms foo;
+ #endif
+     return times(&foo)/(float)HZ;
