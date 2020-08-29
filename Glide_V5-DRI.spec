@@ -3,7 +3,7 @@
 %bcond_without	glide3_sdk	# don't build glide3x SDK here
 #
 %define snapdate 20010309
-%define	rel	14
+%define	rel	15
 Summary:	Glide runtime for 3Dfx Voodoo4 and Voodoo5 boards
 Summary(ko.UTF-8):	3Dfx 부두 벤쉬/3 비디오카드용 Glide 런타임 라이브러리
 Summary(pl.UTF-8):	Biblioteki Glide dla kart 3Dfx Voodoo4 i Voodoo5
