@@ -409,10 +409,8 @@ Index: b/glide3x/h5/glide3/src/distrip.c
          Count -= 3;
        }
      }
-Index: b/glide3x/h5/glide3/src/glfb.c
-===================================================================
---- a/glide3x/h5/glide3/src/glfb.c
-+++ b/glide3x/h5/glide3/src/glfb.c
+--- x/glide3x-20010309/h5/glide3/src/glfb.c.orig	2022-09-26 21:32:58.823335084 +0200
++++ x/glide3x-20010309/h5/glide3/src/glfb.c	2022-09-26 21:37:53.375072694 +0200
 @@ -1333,8 +1333,10 @@ GR_ENTRY(grLfbReadRegion, FxBool, (GrBuf
        while(src_height--)
        {
@@ -427,7 +425,7 @@ Index: b/glide3x/h5/glide3/src/glfb.c
           /* read in dwords of pixels */
           if(length)
 @@ -1353,8 +1355,8 @@ GR_ENTRY(grLfbReadRegion, FxBool, (GrBuf
-                *((FxU16 *)(((AnyPtr)dst) + byte_index))=*((FxU16 *)(((AnyPtr)src) + byte_index));
+                *((FxU16 *)(((FxU32)dst) + byte_index))=*((FxU16 *)(((FxU32)src) + byte_index));
           }
           /* adjust for next line */
 -         ((FxU8 *)src)+=src_adjust;
